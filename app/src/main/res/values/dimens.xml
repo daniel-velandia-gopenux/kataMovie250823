@@ -1,0 +1,8 @@
+<resources>
+    <dimen name="item_vertical_margin">16dp</dimen>
+    <dimen name="item_horizontal_margin">16dp</dimen>
+    <dimen name="item_image_height">250dp</dimen>
+
+    <dimen name="fragment_vertical_padding">16dp</dimen>
+    <dimen name="fragment_horizontal_padding">16dp</dimen>
+</resources>
