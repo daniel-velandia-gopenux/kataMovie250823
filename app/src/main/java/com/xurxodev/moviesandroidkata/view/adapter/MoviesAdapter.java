@@ -2,16 +2,10 @@ package com.xurxodev.moviesandroidkata.view.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.squareup.picasso.Picasso;
-import com.xurxodev.moviesandroidkata.R;
 import com.xurxodev.moviesandroidkata.databinding.ItemMoviesBinding;
 import com.xurxodev.moviesandroidkata.model.Movie;
-
 import java.util.ArrayList;
 import java.util.List;
 

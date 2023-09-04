@@ -1,37 +1,43 @@
 package com.xurxodev.moviesandroidkata.view.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
+import com.xurxodev.moviesandroidkata.App;
 import com.xurxodev.moviesandroidkata.R;
 import com.xurxodev.moviesandroidkata.data.DiskMovieRepository;
-import com.xurxodev.moviesandroidkata.databinding.ActivityMoviesBinding;
 import com.xurxodev.moviesandroidkata.databinding.FragmentMoviesBinding;
 import com.xurxodev.moviesandroidkata.model.Movie;
 import com.xurxodev.moviesandroidkata.view.adapter.MoviesAdapter;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class MoviesFragment extends Fragment {
 
     private FragmentMoviesBinding binding;
-    private DiskMovieRepository movieRepository;
+    @Inject
+    DiskMovieRepository movieRepository;
     private MoviesAdapter adapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        binding = FragmentMoviesBinding.inflate(inflater);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        ((App) getActivity().getApplication()).appComponent.inject(this);
+    }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        binding = FragmentMoviesBinding.inflate(inflater);
         initializeRefreshButton();
         initializeAdapter();
         initializeRecyclerView();
@@ -61,13 +67,9 @@ public class MoviesFragment extends Fragment {
     private void loadMovies() {
         loadingMovies();
 
-
-
         @SuppressLint("StaticFieldLeak") AsyncTask<Void,Void,List<Movie>> moviesAsyncTask = new AsyncTask<Void, Void, List<Movie>>() {
             @Override
             protected List<Movie> doInBackground(Void... params) {
-                movieRepository = new DiskMovieRepository(getActivity().getApplication());
-
                 return movieRepository.getMovies();
             }
 
