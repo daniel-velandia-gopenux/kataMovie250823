@@ -8,24 +8,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.xurxodev.moviesandroidkata.App;
 import com.xurxodev.moviesandroidkata.R;
-import com.xurxodev.moviesandroidkata.data.DiskMovieRepository;
 import com.xurxodev.moviesandroidkata.databinding.FragmentMoviesBinding;
 import com.xurxodev.moviesandroidkata.model.Movie;
 import com.xurxodev.moviesandroidkata.view.adapter.MoviesAdapter;
-
 import java.util.List;
-
 import javax.inject.Inject;
 
 public class MoviesFragment extends Fragment {
 
     private FragmentMoviesBinding binding;
-    @Inject
-    DiskMovieRepository movieRepository;
     private MoviesAdapter adapter;
+    @Inject
+    MovieRepository movieRepository;
 
     @Override
     public void onAttach(Context context) {
@@ -38,6 +34,7 @@ public class MoviesFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         binding = FragmentMoviesBinding.inflate(inflater);
+
         initializeRefreshButton();
         initializeAdapter();
         initializeRecyclerView();

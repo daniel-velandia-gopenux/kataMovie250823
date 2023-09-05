@@ -1,17 +1,14 @@
 package com.xurxodev.moviesandroidkata.di.component;
 
 import android.app.Application;
-
-import com.xurxodev.moviesandroidkata.di.module.DiskRepoModule;
+import com.xurxodev.moviesandroidkata.di.module.RepoModule;
 import com.xurxodev.moviesandroidkata.view.fragment.MoviesFragment;
-
 import javax.inject.Singleton;
-
 import dagger.BindsInstance;
 import dagger.Component;
 
 @Singleton
-@Component(modules = {DiskRepoModule.class})
+@Component(modules = {RepoModule.class})
 public interface AppComponent {
     void inject(MoviesFragment moviesFragment);
 

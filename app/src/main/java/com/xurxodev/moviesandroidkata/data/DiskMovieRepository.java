@@ -1,23 +1,21 @@
 package com.xurxodev.moviesandroidkata.data;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
-
 import com.google.gson.Gson;
 import com.xurxodev.moviesandroidkata.R;
 import com.xurxodev.moviesandroidkata.model.Movie;
+import com.xurxodev.moviesandroidkata.view.fragment.MovieRepository;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
-public class DiskMovieRepository {
+public class DiskMovieRepository implements MovieRepository {
 
     Context applicationContext;
 
@@ -41,12 +39,11 @@ public class DiskMovieRepository {
         return Arrays.asList(movies);
     }
 
-    @SuppressLint("LongLogTag")
     public String getJsonString() {
         try {
             return convertJsonToString();
         } catch (IOException e){
-            Log.e("An error occurred while reading the json file", e.getMessage());
+            Log.e("Error reading file", e.getMessage());
         }
         return "";
     }

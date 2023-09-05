@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
     defaultConfig {
         applicationId "com.xurxodev.moviesandroidkata"
         minSdkVersion 16
@@ -20,6 +19,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    namespace 'com.xurxodev.moviesandroidkata'
 }
 
 dependencies {
