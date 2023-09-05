@@ -1,4 +1,4 @@
-package com.xurxodev.moviesandroidkata.data;
+package com.xurxodev.moviesandroidkata.model.data;
 
 import android.app.Application;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.xurxodev.moviesandroidkata.R;
 import com.xurxodev.moviesandroidkata.model.Movie;
-import com.xurxodev.moviesandroidkata.view.fragment.MovieRepository;
+import com.xurxodev.moviesandroidkata.presenter.MovieRepository;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;

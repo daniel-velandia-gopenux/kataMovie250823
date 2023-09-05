@@ -1,8 +1,6 @@
 package com.xurxodev.moviesandroidkata.view.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,17 +9,20 @@ import android.view.ViewGroup;
 import com.xurxodev.moviesandroidkata.App;
 import com.xurxodev.moviesandroidkata.R;
 import com.xurxodev.moviesandroidkata.databinding.FragmentMoviesBinding;
+import com.xurxodev.moviesandroidkata.presenter.MoviePresenter;
 import com.xurxodev.moviesandroidkata.model.Movie;
 import com.xurxodev.moviesandroidkata.view.adapter.MoviesAdapter;
+
 import java.util.List;
+
 import javax.inject.Inject;
 
-public class MoviesFragment extends Fragment {
+public class MoviesFragment extends Fragment implements MoviePresenter.MoviesView {
 
     private FragmentMoviesBinding binding;
     private MoviesAdapter adapter;
     @Inject
-    MovieRepository movieRepository;
+    MoviePresenter moviePresenter;
 
     @Override
     public void onAttach(Context context) {
@@ -39,16 +40,20 @@ public class MoviesFragment extends Fragment {
         initializeAdapter();
         initializeRecyclerView();
 
-        loadMovies();
+        initializePresenter();
 
         return binding.getRoot();
+    }
+
+    private void initializePresenter() {
+        moviePresenter.AttachView(this);
     }
 
     private void initializeRefreshButton(){
         binding.refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadMovies();
+                moviePresenter.onRefreshMovies();
             }
         });
     }
@@ -61,30 +66,14 @@ public class MoviesFragment extends Fragment {
         binding.recyclerviewMovies.setAdapter(adapter);
     }
 
-    private void loadMovies() {
-        loadingMovies();
-
-        @SuppressLint("StaticFieldLeak") AsyncTask<Void,Void,List<Movie>> moviesAsyncTask = new AsyncTask<Void, Void, List<Movie>>() {
-            @Override
-            protected List<Movie> doInBackground(Void... params) {
-                return movieRepository.getMovies();
-            }
-
-            @Override
-            protected void onPostExecute(List<Movie> movies) {
-                loadedMovies(movies);
-            }
-        };
-
-        moviesAsyncTask.execute();
-    }
-
-    private void loadingMovies(){
+    @Override
+    public void loadingMovies(){
         adapter.clearMovies();
         binding.moviesTitleTextView.setText(R.string.loading_movies_text);
     }
 
-    private void loadedMovies(List<Movie> movies){
+    @Override
+    public void loadedMovies(List<Movie> movies){
         adapter.setMovies(movies);
         refreshTitleWithMoviesCount(movies);
     }
