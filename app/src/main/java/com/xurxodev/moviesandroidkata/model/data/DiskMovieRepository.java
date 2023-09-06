@@ -1,12 +1,11 @@
 package com.xurxodev.moviesandroidkata.model.data;
 
-import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 import com.google.gson.Gson;
 import com.xurxodev.moviesandroidkata.R;
 import com.xurxodev.moviesandroidkata.model.Movie;
-import com.xurxodev.moviesandroidkata.presenter.MovieRepository;
+import com.xurxodev.moviesandroidkata.view.fragment.MoviesFragment;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -15,13 +14,15 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
-public class DiskMovieRepository implements MovieRepository {
+public class DiskMovieRepository implements MoviesFragment.MovieRepository {
 
     Context applicationContext;
+    Gson gson;
 
     @Inject
-    public DiskMovieRepository(Application applicationContext){
+    public DiskMovieRepository(Context applicationContext, Gson gson) {
         this.applicationContext = applicationContext;
+        this.gson = gson;
     }
 
     public List<Movie> getMovies() {
@@ -33,7 +34,6 @@ public class DiskMovieRepository implements MovieRepository {
 
     private List<Movie> convertJsonStringToList() {
         String jsonString = getJsonString();
-        Gson gson = new Gson();
         Movie[] movies = gson.fromJson(jsonString, Movie[].class);
 
         return Arrays.asList(movies);

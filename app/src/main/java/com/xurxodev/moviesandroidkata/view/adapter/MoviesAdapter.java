@@ -9,9 +9,13 @@ import com.xurxodev.moviesandroidkata.model.Movie;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
     private ItemMoviesBinding binding;
+
+    @Inject Picasso picasso;
 
     public List<Movie> movies = new ArrayList<>();
 
@@ -54,7 +58,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         }
 
         public void render(Movie movie) {
-            Picasso.get()
+            picasso.get()
                     .load(movie.getImage())
                     .into(binding.itemMoviePoster);
 
