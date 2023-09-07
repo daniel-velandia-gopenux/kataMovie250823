@@ -29,7 +29,11 @@ public class MoviesFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        ((App) getActivity().getApplication()).appComponent.inject(this);
+        ((App) getActivity().getApplication()).appComponent
+                .getPicassoSubComponent()
+                .create()
+                .inject(this);
+
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.xurxodev.moviesandroidkata.id.module;
+package com.xurxodev.moviesandroidkata.id.component.module;
 
 import android.app.Application;
 import android.content.Context;

@@ -15,7 +15,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
     private ItemMoviesBinding binding;
 
-    @Inject Picasso picasso;
+    @Inject
+    Picasso picasso;
 
     public List<Movie> movies = new ArrayList<>();
 
